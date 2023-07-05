@@ -32,11 +32,14 @@ Model::Model(const char *filename) : verts_(), faces_() {
                 f.push_back(face_idx);
             }
             faces_.push_back(f);
+            face_texts_.push_back(t);
         } else if (!line.compare(0,3,"vt ")) {
-            Vec2f v;
-            float ftrash;
-            for (int i = 0; i < 2; ++i)     iss >> v.raw[i];
-            iss >> ftrash;
+            iss >> trash >> trash;
+            Vec3f v;
+            // float ftrash;
+            for (int i = 0; i < 3; ++i)     iss >> v.raw[i];
+            std::cerr << v << '\n';
+            // iss >> ftrash;
             texts_.push_back(v);
         }
     }
@@ -72,6 +75,6 @@ Vec3f Model::vert(int i) {
     return verts_[i];
 }
 
-Vec2f Model::text(int i) { //text[i]:texture coordinate
+Vec3f Model::text(int i) { //text[i]:texture coordinate
     return texts_[i];
 }
